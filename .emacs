@@ -9,17 +9,16 @@
 
 ;; Turn all indenting off.
 (defun my-turn-indentation-off ()
-  (interactive)
-  (local-set-key (kbd "<tab>") 'tab-to-tab-stop))
-
+    (interactive)
+    (local-set-key (kbd "<tab>") 'tab-to-tab-stop))
 (dolist (hook '(perl-mode-hook
-                cperl-mode-hook
-				c-mode-hook
-                c++-mode-hook
-                java-mode-hook
-				emacs-lisp-mode-hook
-				javascript-mode-hook))
-  (add-hook hook 'my-turn-indentation-off))
+    cperl-mode-hook
+    c-mode-hook
+    c++-mode-hook
+    java-mode-hook
+    emacs-lisp-mode-hook
+    javascript-mode-hook))
+(add-hook hook 'my-turn-indentation-off))
 
 
 ;; Always replace tabs with spaces.
