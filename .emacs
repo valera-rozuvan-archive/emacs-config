@@ -1,3 +1,21 @@
+;; Include a major mode for editing CoffeeScript files.
+(add-to-list 'load-path "~/.emacs.d/coffee-mode")
+(require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
+
+;; Include haml-mode. This mode is required by sass-mode (see below).
+(add-to-list 'load-path "~/.emacs.d/haml-mode")
+(require 'haml-mode)
+
+
+;; Include a major mode for editing Sass files.
+(add-to-list 'load-path "~/.emacs.d/sass-mode")
+(require 'sass-mode)
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . sass-mode))
+
+
 ;; Disable auto-save and auto-backup.
 (setq auto-save-default nil)
 (setq make-backup-files nil)
@@ -17,7 +35,9 @@
     c++-mode-hook
     java-mode-hook
     emacs-lisp-mode-hook
-    javascript-mode-hook))
+    js-mode-hook
+    coffee-mode-hook
+    sass-mode-hook))
 (add-hook hook 'my-turn-indentation-off))
 
 
@@ -40,3 +60,8 @@
 ;; Disable the start-up splash screen.
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
+
+
+;; Disabling the Menu Bar, and Toolbar
+(menu-bar-mode -1)
+(tool-bar-mode -1)
