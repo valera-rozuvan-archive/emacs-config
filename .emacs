@@ -25,16 +25,14 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-;; Turn all indenting off.
+;; Turn indenting off for all modes that we use.
 (defun my-turn-indentation-off ()
     (interactive)
     (local-set-key (kbd "<tab>") 'tab-to-tab-stop))
-(dolist (hook '(perl-mode-hook
-    cperl-mode-hook
-    c-mode-hook
-    c++-mode-hook
-    java-mode-hook
-    emacs-lisp-mode-hook
+(dolist (hook '(emacs-lisp-mode-hook
+    text-mode-hook
+    fundamental-mode-hook
+    python-mode-hook
     js-mode-hook
     coffee-mode-hook
     sass-mode-hook))
