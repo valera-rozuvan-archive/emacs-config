@@ -16,6 +16,10 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . sass-mode))
 
 
+;; Turn on ruby-mode for Rake files.
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+
+
 ;; Disable auto-save and auto-backup.
 (setq auto-save-default nil)
 (setq make-backup-files nil)
@@ -35,7 +39,8 @@
     python-mode-hook
     js-mode-hook
     coffee-mode-hook
-    sass-mode-hook))
+    sass-mode-hook
+    ruby-mode-hook))
 (add-hook hook 'my-turn-indentation-off))
 
 
