@@ -1,3 +1,10 @@
+;; Include a major mode for editing Yaml files.
+(add-to-list 'load-path "~/.emacs.d/yaml-mode")
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+
+
 ;; Include a major mode for editing CoffeeScript files.
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
@@ -40,7 +47,8 @@
     js-mode-hook
     coffee-mode-hook
     sass-mode-hook
-    ruby-mode-hook))
+    ruby-mode-hook
+    yaml-mode-hook))
 (add-hook hook 'my-turn-indentation-off))
 
 
