@@ -1,3 +1,10 @@
+;; Include a major mode for editing MarkDown files.
+(add-to-list 'load-path "~/.emacs.d/markdown-mode")
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+
+
 ;; Include a major mode for editing Yaml files.
 (add-to-list 'load-path "~/.emacs.d/yaml-mode")
 (require 'yaml-mode)
@@ -48,7 +55,8 @@
     coffee-mode-hook
     sass-mode-hook
     ruby-mode-hook
-    yaml-mode-hook))
+    yaml-mode-hook
+    markdown-mode-hook))
 (add-hook hook 'my-turn-indentation-off))
 
 
