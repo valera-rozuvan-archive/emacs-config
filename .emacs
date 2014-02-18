@@ -1,3 +1,38 @@
+;; Include tabs. Each file will have it's own tab for easy
+;; switching between open files.
+(add-to-list 'load-path "~/.emacs.d/tabbar")
+(require 'tabbar)
+(tabbar-mode)
+
+
+;; Define and enable tab group function that defines all tabs to be one
+;; of two possible groups: “emacs” and “user”.
+(defun my-tabbar-buffer-groups () ;; customize to show all normal files in one group
+    "Returns the name of the tab group names the current buffer belongs to.
+    There are two groups: Emacs buffers (those whose name starts with '*', plus
+    dired buffers), and the rest.  This works at least with Emacs v24.2 using
+    tabbar.el v1.7."
+    (list
+        (cond
+            ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+            ((eq major-mode 'dired-mode) "emacs")
+            (t "user")
+        )
+    )
+)
+(setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
+
+
+;; Easy navigation between tabbar tabs.
+(global-set-key (kbd "<prior>") 'tabbar-backward-tab)
+(global-set-key (kbd "<next>") 'tabbar-forward-tab)
+
+
+;; Easy navigation between tabbar groups.
+(global-set-key (kbd "<home>") 'tabbar-backward-group)
+(global-set-key (kbd "<end>") 'tabbar-forward-group)
+
+
 ;; Include a major mode for editing MarkDown files.
 (add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (require 'markdown-mode)
@@ -84,3 +119,16 @@
 ;; Disabling the Menu Bar, and Toolbar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+
+
+;; Automatically reload files when they are modified by external programs.
+(global-auto-revert-mode 1)
+;; Display a warning about it.
+(defun inform-revert-modified-file (&optional p1 p2)
+    "bdimych custom function"
+    (let ((revert-buffer-function nil))
+        (revert-buffer p1 p2)
+        (message-box (concat "[\"" (buffer-file-name) "\"]: Reloaded file from disk."))
+    )
+)
+(setq revert-buffer-function 'inform-revert-modified-file)
