@@ -24,13 +24,13 @@
 
 
 ;; Easy navigation between tabbar tabs.
-(global-set-key (kbd "<prior>") 'tabbar-backward-tab)
-(global-set-key (kbd "<next>") 'tabbar-forward-tab)
+(global-set-key [C-prior] 'tabbar-backward-tab)
+(global-set-key [C-next] 'tabbar-forward-tab)
 
 
 ;; Easy navigation between tabbar groups.
-(global-set-key (kbd "<home>") 'tabbar-backward-group)
-(global-set-key (kbd "<end>") 'tabbar-forward-group)
+(global-set-key [M-prior] 'tabbar-backward-group)
+(global-set-key [M-next] 'tabbar-forward-group)
 
 
 ;; Include a major mode for editing MarkDown files.
