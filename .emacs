@@ -122,6 +122,8 @@
 
 
 ;; If a file has been modified on disk, ask what to do.
+;; Taken from and modified:
+;;     http://stackoverflow.com/questions/7031051/emacs-notify-when-a-file-has-been-modified-externally
 (defun ask-user-about-supersession-threat (fn) "blatantly ignore files that changed on disk")
 (run-with-timer 0 2 'my-check-external-modifications)
 (add-hook 'after-save-hook 'my-check-external-modifications)
@@ -145,15 +147,15 @@
     (if (verify-visited-file-modtime (current-buffer))
         (progn
             (global-set-key (kbd "<f5>") 'my-load-external-modifications)
-            (global-set-key (kbd "C-s") 'save-buffer)
+            (global-set-key (kbd "<f6>") 'save-buffer)
             (setq header-line-format tabbar-header-line-format)
         )
         (progn
             (global-set-key (kbd "<f5>") 'my-load-external-modifications)
-            (global-set-key (kbd "C-s") 'my-overwrite-external-modifications)
+            (global-set-key (kbd "<f6>") 'my-overwrite-external-modifications)
             (setq header-line-format
                 (format
-                    "%s. Press F5 to load external changes, C-s to overwrite them"
+                    "%s. Press F5 to load external changes, F6 to overwrite them"
                     (propertize
                         "This file has been changed externally"
                         'face
