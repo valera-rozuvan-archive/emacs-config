@@ -2,7 +2,84 @@
 ;; switching between open files.
 (add-to-list 'load-path "~/.emacs.d/tabbar")
 (require 'tabbar)
-(tabbar-mode)
+
+;; Tabbar settings.
+;; Taken from:
+;;     https://gist.github.com/3demax/1264635
+(set-face-attribute
+    'tabbar-default nil
+    :background "gray20"
+    :foreground "gray20"
+    :box '(:line-width 1 :color "gray20" :style nil)
+)
+(set-face-attribute
+    'tabbar-unselected nil
+    :background "gray30"
+    :foreground "white"
+    :box '(:line-width 5 :color "gray30" :style nil)
+)
+(set-face-attribute
+    'tabbar-selected nil
+    :background "gray75"
+    :foreground "black"
+    :box '(:line-width 5 :color "gray75" :style nil)
+)
+(set-face-attribute
+    'tabbar-highlight nil
+    :background "white"
+    :foreground "black"
+    :underline nil
+    :box '(:line-width 5 :color "white" :style nil)
+)
+(set-face-attribute
+    'tabbar-button nil
+    :box '(:line-width 1 :color "gray20" :style nil)
+)
+(set-face-attribute
+    'tabbar-separator nil
+    :background "gray20"
+    :height 0.6
+)
+
+;; Change padding of the tabs. We also need to set separator to avoid
+;; overlapping tabs by highlighted tabs.
+(custom-set-variables
+    '(tabbar-separator (quote (0.5)))
+)
+
+;; Ading spaces.
+(defun tabbar-buffer-tab-label (tab)
+    "Return a label for TAB.
+    That is, a string used to represent it on the tab bar."
+    (let (
+            (
+                label (if tabbar--buffer-show-groups
+                    (format "[%s] " (tabbar-tab-tabset tab))
+                    (format "%s " (tabbar-tab-value tab))
+                )
+            )
+        )
+
+        ;; Unless the tab bar auto scrolls to keep the selected tab
+        ;; visible, shorten the tab label to keep as many tabs as possible
+        ;; in the visible area of the tab bar.
+        (if tabbar-auto-scroll-flag
+            label
+            (tabbar-shorten
+                label (max 1
+                    (/ (window-width)
+                        (length (tabbar-view
+                            (tabbar-current-tabset))
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+;; Always enable the tabbar.
+(tabbar-mode 1)
 
 
 ;; Define and enable tab group function that defines all tabs to be one
@@ -78,21 +155,32 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-;; Turn indenting off for all modes that we use.
-(defun my-turn-indentation-off ()
+;; Turn indenting off on TAB and RETURN key
+;; press for all modes that we use.
+(defun no-indentation-for-tab ()
     (interactive)
-    (local-set-key (kbd "<tab>") 'tab-to-tab-stop))
-(dolist (hook '(emacs-lisp-mode-hook
-    text-mode-hook
-    fundamental-mode-hook
-    python-mode-hook
-    js-mode-hook
-    coffee-mode-hook
-    sass-mode-hook
-    ruby-mode-hook
-    yaml-mode-hook
-    markdown-mode-hook))
-(add-hook hook 'my-turn-indentation-off))
+    (local-set-key (kbd "<tab>") 'tab-to-tab-stop)
+)
+(defun set-newline-for-return ()
+    (interactive)
+    (local-set-key (kbd "RET") 'newline)
+)
+(dolist (
+    hook '(
+        emacs-lisp-mode-hook
+        text-mode-hook
+        fundamental-mode-hook
+        python-mode-hook
+        js-mode-hook
+        coffee-mode-hook
+        sass-mode-hook
+        ruby-mode-hook
+        yaml-mode-hook
+        markdown-mode-hook
+    ))
+    (add-hook hook 'no-indentation-for-tab)
+    (add-hook hook 'set-newline-for-return)
+)
 
 
 ;; Always replace tabs with spaces.
@@ -166,3 +254,6 @@
         )
     )
 )
+
+(load-theme 'deeper-blue t)
+(set-face-attribute 'default nil :height 150)
