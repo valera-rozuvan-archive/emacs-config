@@ -1,3 +1,11 @@
+;; Include feature-mode for editing cucumber Gherkin (feature)
+;; files.
+(add-to-list 'load-path "~/.emacs.d/feature-mode")
+(setq feature-default-language "fi")
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
+
 ;; Include tabs. Each file will have it's own tab for easy
 ;; switching between open files.
 (add-to-list 'load-path "~/.emacs.d/tabbar")
@@ -177,6 +185,7 @@
         ruby-mode-hook
         yaml-mode-hook
         markdown-mode-hook
+        feature-mode-hook
     ))
     (add-hook hook 'no-indentation-for-tab)
     (add-hook hook 'set-newline-for-return)
@@ -256,4 +265,4 @@
 )
 
 (load-theme 'deeper-blue t)
-(set-face-attribute 'default nil :height 150)
+(set-face-attribute 'default nil :height 120)
