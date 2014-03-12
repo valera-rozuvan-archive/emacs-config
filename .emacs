@@ -150,8 +150,9 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . sass-mode))
 
 
-;; Turn on ruby-mode for Rake files.
+;; Turn on ruby-mode for Rake files, and Vagrantfile files.
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\Vagrantfile\\'" . ruby-mode))
 
 
 ;; Disable auto-save and auto-backup.
