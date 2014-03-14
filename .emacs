@@ -161,6 +161,17 @@
 (add-to-list 'auto-mode-alist '("\\.gitignore\\'" . gitignore-mode))
 
 
+;; Set-up JSLint.
+;; First enable flymake-easy mode.
+(add-to-list 'load-path "~/.emacs.d/flymake-easy")
+(require 'flymake-easy)
+;; Then enable flymake-jslint mode.
+(add-to-list 'load-path "~/.emacs.d/flymake-jslint")
+(require 'flymake-jslint)
+;; Enable JSLint for JavaScript mode.
+(add-hook 'js-mode-hook 'flymake-jslint-load)
+
+
 ;; Disable auto-save and auto-backup.
 (setq auto-save-default nil)
 (setq make-backup-files nil)
@@ -273,5 +284,21 @@
     )
 )
 
+
+;; Configure the theme and the font size.
 (load-theme 'deeper-blue t)
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 140)
+
+
+;; Make sure that the current position (line and column number) of the
+;; cursor is shown.
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+
+;; Enable the display of date and time in mode line.
+(setq
+    display-time-day-and-date t
+    display-time-24hr-format t
+)
+(display-time-mode t)
