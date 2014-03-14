@@ -155,6 +155,12 @@
 (add-to-list 'auto-mode-alist '("\\Vagrantfile\\'" . ruby-mode))
 
 
+;; Include a major mode for editing gitignore files.
+(add-to-list 'load-path "~/.emacs.d/gitignore-mode")
+(require 'gitignore-mode)
+(add-to-list 'auto-mode-alist '("\\.gitignore\\'" . gitignore-mode))
+
+
 ;; Disable auto-save and auto-backup.
 (setq auto-save-default nil)
 (setq make-backup-files nil)
@@ -187,6 +193,8 @@
         yaml-mode-hook
         markdown-mode-hook
         feature-mode-hook
+        shell-script-mode-hook
+        sh-mode-hook
     ))
     (add-hook hook 'no-indentation-for-tab)
     (add-hook hook 'set-newline-for-return)
