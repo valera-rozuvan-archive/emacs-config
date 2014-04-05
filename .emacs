@@ -172,6 +172,18 @@
 (add-hook 'js-mode-hook 'flymake-jslint-load)
 
 
+;; Enable popup mode.
+(add-to-list 'load-path "~/.emacs.d/popup-el")
+(require 'popup)
+
+
+;; Enable auto-complete mode.
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
+(ac-config-default)
+
+
 ;; Disable auto-save and auto-backup.
 (setq auto-save-default nil)
 (setq make-backup-files nil)
