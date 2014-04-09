@@ -163,13 +163,24 @@
 
 ;; Set-up JSLint.
 ;; First enable flymake-easy mode.
-(add-to-list 'load-path "~/.emacs.d/flymake-easy")
-(require 'flymake-easy)
+;; (add-to-list 'load-path "~/.emacs.d/flymake-easy")
+;; (require 'flymake-easy)
 ;; Then enable flymake-jslint mode.
-(add-to-list 'load-path "~/.emacs.d/flymake-jslint")
-(require 'flymake-jslint)
+;; (add-to-list 'load-path "~/.emacs.d/flymake-jslint")
+;; (require 'flymake-jslint)
 ;; Enable JSLint for JavaScript mode.
-(add-hook 'js-mode-hook 'flymake-jslint-load)
+;; (add-hook 'js-mode-hook 'flymake-jslint-load)
+
+
+;; Set-up JSHint.
+(add-to-list 'load-path "~/.emacs.d/jshint-mode")
+(require 'flymake-jshint)
+(add-hook 'js-mode-hook
+     (lambda () (flymake-mode t)))
+(add-to-list 'auto-mode-alist '("\\.jshintrc\\'" . js-mode))
+;; Enable JSHint for JavaScript mode.
+;; (add-hook 'js-mode-hook 'flymake-jslint-load)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
 
 
 ;; Enable popup mode.
