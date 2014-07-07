@@ -309,7 +309,8 @@
 
 
 ;; Configure the theme and the font size.
-(load-theme 'deeper-blue t)
+;; (load-theme 'deeper-blue t)
+(load-theme 'adwaita t)
 (set-face-attribute 'default nil :height 140)
 
 
